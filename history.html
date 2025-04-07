@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TrackEase | Order History</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="history.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <i class="fas fa-shipping-fast"></i>
+                <h1>TrackEase</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html"><i class="fas fa-search"></i> Track Order</a></li>
+                    <li><a href="history.html" class="active"><i class="fas fa-history"></i> History</a></li>
+                    <li><a href="#"><i class="fas fa-user"></i> Account</a></li>
+                    <li><a href="#"><i class="fas fa-question-circle"></i> Support</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <section class="history-hero">
+                <div class="history-hero-content">
+                    <h2>Order History</h2>
+                    <p>View and manage all your past and current shipments in one place.</p>
+                    <div class="history-filters">
+                        <div class="filter-section">
+                            <label for="dateRange">Time Period:</label>
+                            <select id="dateRange">
+                                <option value="all">All Time</option>
+                                <option value="30">Last 30 Days</option>
+                                <option value="90">Last 90 Days</option>
+                                <option value="180">Last 6 Months</option>
+                                <option value="365">Last Year</option>
+                            </select>
+                        </div>
+                        <div class="filter-section">
+                            <label for="statusFilter">Status:</label>
+                            <select id="statusFilter">
+                                <option value="all">All Statuses</option>
+                                <option value="in-transit">In Transit</option>
+                                <option value="delivered">Delivered</option>
+                                <option value="pending">Pending</option>
+                                <option value="exception">Exception</option>
+                            </select>
+                        </div>
+                        <div class="filter-section search">
+                            <input type="text" id="searchHistory" placeholder="Search by tracking number or item...">
+                            <button id="searchButton"><i class="fas fa-search"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="history-dashboard">
+                <div class="dashboard-stats">
+                    <div class="stat-card active">
+                        <div class="stat-icon">
+                            <i class="fas fa-dolly"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="activeOrders">3</h3>
+                            <p>Active Orders</p>
+                        </div>
+                    </div>
+                    <div class="stat-card delivered">
+                        <div class="stat-icon">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="deliveredOrders">24</h3>
+                            <p>Delivered</p>
+                        </div>
+                    </div>
+                    <div class="stat-card exception">
+                        <div class="stat-icon">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="exceptionOrders">1</h3>
+                            <p>Exception</p>
+                        </div>
+                    </div>
+                    <div class="stat-card total">
+                        <div class="stat-icon">
+                            <i class="fas fa-boxes"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="totalOrders">28</h3>
+                            <p>Total Orders</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="order-list-container">
+                    <div class="order-list-header">
+                        <div class="order-header tracking">Tracking #</div>
+                        <div class="order-header date">Order Date</div>
+                        <div class="order-header product">Product</div>
+                        <div class="order-header status">Status</div>
+                        <div class="order-header eta">ETA</div>
+                        <div class="order-header actions">Actions</div>
+                    </div>
+                    
+                    <div class="order-list" id="orderList">
+                        <!-- Orders will be loaded via JavaScript -->
+                    </div>
+                    
+                    <div class="pagination">
+                        <button id="prevPage" disabled><i class="fas fa-chevron-left"></i></button>
+                        <div id="paginationNumbers">
+                            <span class="page-number active">1</span>
+                            <span class="page-number">2</span>
+                            <span class="page-number">3</span>
+                        </div>
+                        <button id="nextPage"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="history-analytics">
+                <h3>Delivery Insights</h3>
+                <div class="analytics-cards">
+                    <div class="analytics-card">
+                        <h4>Delivery Performance</h4>
+                        <div class="chart-container">
+                            <canvas id="deliveryChart"></canvas>
+                            <div class="chart-placeholder">
+                                <div class="chart-bar" style="height: 60%;"></div>
+                                <div class="chart-bar" style="height: 80%;"></div>
+                                <div class="chart-bar" style="height: 40%;"></div>
+                                <div class="chart-bar" style="height: 90%;"></div>
+                                <div class="chart-bar" style="height: 70%;"></div>
+                                <div class="chart-bar" style="height: 50%;"></div>
+                            </div>
+                        </div>
+                        <p>Average delivery time: <strong>3.2 days</strong></p>
+                    </div>
+                    <div class="analytics-card">
+                        <h4>Carrier Reliability</h4>
+                        <div class="chart-container">
+                            <div class="donut-chart-placeholder">
+                                <div class="donut-segment" style="--offset: 0; --value: 60; --bg: var(--primary-color);"></div>
+                                <div class="donut-segment" style="--offset: 60; --value: 25; --bg: var(--success-color);"></div>
+                                <div class="donut-segment" style="--offset: 85; --value: 15; --bg: var(--warning-color);"></div>
+                                <div class="donut-hole"></div>
+                            </div>
+                        </div>
+                        <div class="chart-legend">
+                            <div class="legend-item">
+                                <span class="legend-color" style="background-color: var(--primary-color);"></span>
+                                <span>Express Delivery (60%)</span>
+                            </div>
+                            <div class="legend-item">
+                                <span class="legend-color" style="background-color: var(--success-color);"></span>
+                                <span>Standard Post (25%)</span>
+                            </div>
+                            <div class="legend-item">
+                                <span class="legend-color" style="background-color: var(--warning-color);"></span>
+                                <span>Economy (15%)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <i class="fas fa-shipping-fast"></i>
+                    <h2>TrackEase</h2>
+                    <p>The most reliable way to track your packages</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-section">
+                        <h4>Company</h4>
+                        <ul>
+                            <li><a href="#">About Us</a></li>
+                            <li><a href="#">Careers</a></li>
+                            <li><a href="#">Press</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Support</h4>
+                        <ul>
+                            <li><a href="#">Help Center</a></li>
+                            <li><a href="#">Contact Us</a></li>
+                            <li><a href="#">FAQs</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Legal</h4>
+                        <ul>
+                            <li><a href="#">Terms of Service</a></li>
+                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="#">Cookies</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 TrackEase. All rights reserved.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Order Details Modal -->
+    <div class="modal" id="orderDetailsModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Order Details</h3>
+                <button class="close-modal"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Modal content will be loaded here via JavaScript -->
+            </div>
+            <div class="modal-footer">
+                <button class="modal-btn primary">Track Package</button>
+                <button class="modal-btn secondary">Contact Support</button>
+                <button class="close-modal-btn">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="history.js"></script>
+</body>
+</html>

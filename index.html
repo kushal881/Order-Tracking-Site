@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TrackEase | Order Tracking System</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <i class="fas fa-shipping-fast"></i>
+                <h1>TrackEase</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#" class="active"><i class="fas fa-search"></i> Track Order</a></li>
+                    <li><a href="history.html"><i class="fas fa-history"></i> History</a></li>
+                    <li><a href="#"><i class="fas fa-user"></i> Account</a></li>
+                    <li><a href="#"><i class="fas fa-question-circle"></i> Support</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <section class="hero">
+                <div class="hero-content">
+                    <h2>Track Your Package</h2>
+                    <p>Enter your tracking number to get real-time updates on your delivery.</p>
+                    <div class="search-box">
+                        <input type="text" id="trackingNumber" placeholder="Enter tracking number (e.g., TR-12345678)">
+                        <button id="trackButton"><i class="fas fa-search"></i> Track</button>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <img src="deliveryillustration.png" alt="Delivery illustration">
+                </div>
+            </section>
+
+            <section class="tracking-info hidden" id="trackingInfo">
+                <h3>Tracking Details <span id="orderNumber"></span></h3>
+                
+                <div class="tracking-card">
+                    <div class="delivery-status">
+                        <div class="status-icon">
+                            <i class="fas fa-box-open"></i>
+                        </div>
+                        <div class="status-info">
+                            <h4>Estimated Delivery</h4>
+                            <p id="estimatedDelivery">Loading...</p>
+                        </div>
+                    </div>
+                    
+                    <div class="package-details">
+                        <div class="detail-item">
+                            <i class="fas fa-truck"></i>
+                            <div>
+                                <h5>Current Status</h5>
+                                <p id="currentStatus">Loading...</p>
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <h5>Current Location</h5>
+                                <p id="currentLocation">Loading...</p>
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-box"></i>
+                            <div>
+                                <h5>Package Details</h5>
+                                <p id="packageDetails">Loading...</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tracking-timeline">
+                        <h4>Tracking Timeline</h4>
+                        <div class="timeline" id="timeline">
+                            <!-- Timeline items will be added here via JavaScript -->
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="actions">
+                    <button class="action-btn primary"><i class="fas fa-bell"></i> Set Notifications</button>
+                    <button class="action-btn secondary"><i class="fas fa-share-alt"></i> Share Tracking</button>
+                    <button class="action-btn secondary"><i class="fas fa-print"></i> Print Details</button>
+                </div>
+            </section>
+
+            <section class="not-found hidden" id="notFound">
+                <div class="not-found-content">
+                    <i class="fas fa-exclamation-circle"></i>
+                    <h3>Order Not Found</h3>
+                    <p>We couldn't find any order with the tracking number you provided. Please check the number and try again.</p>
+                    <button id="tryAgainButton">Try Again</button>
+                </div>
+            </section>
+
+            <section class="features">
+                <h3>Why Choose TrackEase?</h3>
+                <div class="feature-cards">
+                    <div class="feature-card">
+                        <i class="fas fa-clock"></i>
+                        <h4>Real-Time Updates</h4>
+                        <p>Get instant notifications and real-time updates on your package's journey.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-globe"></i>
+                        <h4>Global Tracking</h4>
+                        <p>Track shipments from anywhere in the world with our comprehensive tracking system.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-shield-alt"></i>
+                        <h4>Secure & Reliable</h4>
+                        <p>Your tracking information is secure and our system is reliable 24/7.</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <i class="fas fa-shipping-fast"></i>
+                    <h2>TrackEase</h2>
+                    <p>The most reliable way to track your packages</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-section">
+                        <h4>Company</h4>
+                        <ul>
+                            <li><a href="#">About Us</a></li>
+                            <li><a href="#">Careers</a></li>
+                            <li><a href="#">Press</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Support</h4>
+                        <ul>
+                            <li><a href="#">Help Center</a></li>
+                            <li><a href="#">Contact Us</a></li>
+                            <li><a href="#">FAQs</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Legal</h4>
+                        <ul>
+                            <li><a href="#">Terms of Service</a></li>
+                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="#">Cookies</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 TrackEase. All rights reserved.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <div class="loading-overlay hidden" id="loadingOverlay">
+        <div class="spinner"></div>
+        <p>Fetching your tracking information...</p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
